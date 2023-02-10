@@ -1,6 +1,14 @@
 const docTable = document.querySelector('.table')
 const docResult = document.getElementsByClassName('result')
 
+let result
+
+const loecher = document.querySelector('.loecher')
+const baeren = document.querySelector('.baeren')
+const fische = document.querySelector('.fische')
+
+const button = document.getElementById('rollbutton')
+
 class Dice {
   constructor(val, parent) {
     this.val = val
@@ -99,22 +107,27 @@ function rollDice(nDice) {
     }
     res.fische += 7 - val
 
-    let dice = new Dice(val, docTable)
+    new Dice(val, docTable)
     // docTable.append(dice)
   }
+
+  result = res
 
   // Add Results
   for (let i = 0; i < docResult.length; i++) {
     const result = docResult[i];
 
     if (result.classList.contains('loecher')) {
-      result.querySelector('.res-value').append(res.loecher)
+      result.querySelector('.res-label').innerHTML = 'L?'
+      result.querySelector('.res-value').innerHTML = '???'
     }
     if (result.classList.contains('baeren')) {
-      result.querySelector('.res-value').append(res.baeren)
+      result.querySelector('.res-label').innerHTML = 'B?'
+      result.querySelector('.res-value').innerHTML = '???'
     }
     if (result.classList.contains('fische')) {
-      result.querySelector('.res-value').append(res.fische)
+      result.querySelector('.res-label').innerHTML = '?'
+      result.querySelector('.res-value').innerHTML = '???'
     }
   }
 }
@@ -122,3 +135,25 @@ function rollDice(nDice) {
 function randInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
+
+
+
+loecher.addEventListener('click', (event) => {
+  loecher.querySelector('.res-label').innerHTML = 'Löcher'
+  loecher.querySelector('.res-value').innerHTML = result.loecher
+});
+
+baeren.addEventListener('click', (event) => {
+  baeren.querySelector('.res-label').innerHTML = 'Bären'
+  baeren.querySelector('.res-value').innerHTML = result.baeren
+});
+
+fische.addEventListener('click', (event) => {
+  fische.querySelector('.res-label').innerHTML = 'Fische'
+  fische.querySelector('.res-value').innerHTML = result.fische
+});
+
+button.addEventListener('click', (event) => {
+  docTable.innerHTML = ''
+  rollDice(6)
+});

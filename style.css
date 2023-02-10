@@ -41,6 +41,10 @@ section {
   content: '?';
 }
 
+.res-label {
+  font-size: .75em;
+}
+
 .res-value {
   font-size: 1.25em;
   font-weight: bold;
